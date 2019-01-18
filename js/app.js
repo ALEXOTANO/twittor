@@ -1,12 +1,12 @@
-var url = window.location.href;
-var swLocation = '/twiitor/sw.js';
-console.log('URL:', url);
+// var url = window.location.href;
+// var swLocation = '/twittor/sw.js';
+// console.log('URL:', url);
 
 if( navigator.serviceWorker ) {
-    if ( url.includes( 'localhost' ) ){
-        swLocation = '/sw.js';
-    }
-    swLocation = 'sw.js';
+    // if ( url.includes( 'localhost' ) ){
+    //     swLocation = '/sw.js';
+    // }
+    let swLocation = 'sw.js';
     navigator.serviceWorker.register(swLocation);
 }
 
