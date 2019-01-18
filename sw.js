@@ -1,5 +1,4 @@
 //imports
-
 importScripts('js/sw-utils.js');
 
 const STATIC_CACHE = 'static-v2';
@@ -28,12 +27,12 @@ const APP_SHELL_INMUTABLE = [
     'js/libs/jquery.js'
 ];
 
-self.addEventListener('install', e => {
-    const cacheStatic = caches.open(STATIC_CACHE)
-        .then(cache => cache.addAll(APP_SHELL));
+self.addEventListener( 'install', e => {
+    const cacheStatic = caches.open( STATIC_CACHE )
+        .then( cache => cache.addAll( APP_SHELL ) );
 
-    const cacheInmutable = caches.open(INMUTABLE_CACHE)
-        .then(cache => cache.addAll(APP_SHELL_INMUTABLE));
+    const cacheInmutable = caches.open( INMUTABLE_CACHE )
+        .then( cache => cache.addAll( APP_SHELL_INMUTABLE ) );
 
 
     e.waitUntil( Promise.all( [ cacheInmutable, cacheStatic ] ) );
@@ -42,22 +41,22 @@ self.addEventListener('install', e => {
 self.addEventListener('activate', e => {
     caches.keys().then(keys => {
         keys.forEach(key => {
-            if ( key.includes( 'static' ) && key !== STATIC_CACHE) {
-                return caches.delete(key);
+            if ( key.includes( 'static' ) && key !== STATIC_CACHE ) {
+                return caches.delete( key );
             }
         });
     });
 });
 
-self.addEventListener('fetch', e => {
+self.addEventListener( 'fetch', e => {
 
     const respuesta = caches.match( e.request ).then(res => {
         
         if ( res ) {
             return res;
         }else{
-            console.log('No se encontro en el cache: ', e.request.url);
-            fetch( e.request ).then( nvaRes => {
+            console.log( 'No se encontro en el cache: ', e.request.url );
+            fetch( e.request ).then( nvaRes => { 
                 return actualziarCacheDinamico( DYNAMIC_CACHE, e.request, nvaRes );
             });
         }
