@@ -34,14 +34,18 @@ self.addEventListener( 'install', e => {
     const cacheInmutable = caches.open( INMUTABLE_CACHE )
         .then( cache => cache.addAll( APP_SHELL_INMUTABLE ) );
 
-
     e.waitUntil( Promise.all( [ cacheInmutable, cacheStatic ] ) );
 });
 
 self.addEventListener('activate', e => {
     caches.keys().then(keys => {
         keys.forEach(key => {
+            //elimina todos los caches que tengan la palabra static
             if ( key.includes( 'static' ) && key !== STATIC_CACHE ) {
+                return caches.delete( key );
+            }
+            //elimina todos los caches que tengan la palabra dynamic
+            if ( key.includes( 'dynamic' ) && key !== DYNAMIC_CACHE ) {
                 return caches.delete( key );
             }
         });
