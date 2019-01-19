@@ -12,14 +12,11 @@
     background-color: #dde1e2; 
     width: 100%;
 
-    /* PARA EVITAR EL PULL TO REFRESH EN ANDROID */
-    overscroll-behavior-y: contain;
 
-    /* PARA  EVITAR EL USO DE SELECT , HIGHLIGHT Y CALLOUTS EN IOS*/
+    overscroll-behavior-y: contain;
     -webkit-user-select: none;
     -webkit-tap-highlight-color: transparent;
     -webkit-touch-callout: none;
-
 }
 
 /* Personalizados */

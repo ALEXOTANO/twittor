@@ -1,14 +1,22 @@
-// var url = window.location.href;
-// var swLocation = '/twittor/sw.js';
-// console.log('URL:', url);
 
-if( navigator.serviceWorker ) {
-    // if ( url.includes( 'localhost' ) ){
-    //     swLocation = '/sw.js';
-    // }
-    let swLocation = 'sw.js';
-    navigator.serviceWorker.register(swLocation);
+var url = window.location.href;
+var swLocation = '/twittor/sw.js';
+
+
+if ( navigator.serviceWorker ) {
+
+
+    if ( url.includes('localhost') ) {
+        swLocation = '/sw.js';
+    }
+
+
+    navigator.serviceWorker.register( swLocation );
 }
+
+
+
+
 
 // Referencias de jQuery
 
